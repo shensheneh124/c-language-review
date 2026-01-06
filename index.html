@@ -203,7 +203,9 @@
                 </div>
                 <span class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">C语言复习系统</span>
             </div>
-            <div class="flex items-center gap-2">
+            
+            <!-- 桌面端导航菜单 -->
+            <div class="hidden md:flex items-center gap-2">
                 <button id="nav-home" class="nav-btn px-4 py-2 rounded-lg hover:bg-white/10 transition bg-white/10">
                     <i class="ri-home-4-line mr-1"></i>首页
                 </button>
@@ -229,12 +231,46 @@
                     <i class="ri-star-line mr-1"></i>我的收藏
                 </button>
             </div>
+            
+            <!-- 移动端下拉菜单 -->
+            <div id="mobileMenu" class="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-sm border-t border-white/10 hidden md:hidden z-50 transition-all duration-300 ease-in-out transform origin-top scale-y-0 opacity-0">
+                <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-2">
+                    <button id="mobile-nav-home" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition bg-white/10 text-left">
+                        <i class="ri-home-4-line mr-2"></i>首页
+                    </button>
+                    <button id="mobile-nav-choice" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-checkbox-circle-line mr-2"></i>选择题
+                    </button>
+                    <button id="mobile-nav-fill" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-edit-box-line mr-2"></i>程序填空题
+                    </button>
+                    <button id="mobile-nav-blank" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-edit-2-line mr-2"></i>填空题
+                    </button>
+                    <button id="mobile-nav-program" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-terminal-box-line mr-2"></i>编程题
+                    </button>
+                    <button id="mobile-nav-reading" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-file-code-line mr-2"></i>程序阅读
+                    </button>
+                    <button id="mobile-nav-simulator" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-computer-line mr-2"></i>模拟器
+                    </button>
+                    <button id="mobile-nav-favorites" class="nav-btn px-4 py-3 rounded-lg hover:bg-white/10 transition text-left">
+                        <i class="ri-star-line mr-2"></i>我的收藏
+                    </button>
+                </div>
+            </div>
             <div class="flex items-center gap-3">
-                <div class="text-sm text-gray-400">
+                <div class="text-xs sm:text-sm text-gray-400">
                     <span>得分: </span><span id="totalScore" class="text-green-400 font-bold">0</span>
                 </div>
-                <button id="openQAModalBtn" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
-                    <i class="ri-robot-2-line"></i>
+                <button id="openQAModalBtn" class="p-2 sm:p-3 rounded-lg bg-white/10 hover:bg-white/20 transition">
+                    <i class="ri-robot-2-line text-sm sm:text-base"></i>
+                </button>
+                <!-- 移动端菜单按钮 -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg bg-white/10 hover:bg-white/20 transition">
+                    <i class="ri-menu-2-line text-xl"></i>
                 </button>
             </div>
         </div>
@@ -381,14 +417,14 @@
     <!-- 选择题页面 -->
     <div id="page-choice" class="page pt-20 min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
-            <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold"><i class="ri-checkbox-circle-line mr-2 text-blue-400"></i>选择题练习</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-400">题目 <span id="choiceCurrentNum" class="text-white font-bold">1</span> / <span id="choiceTotalNum">30</span></span>
-                    <button id="favoriteChoiceBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
+                <h1 class="text-2xl sm:text-3xl font-bold"><i class="ri-checkbox-circle-line mr-2 text-blue-400"></i>选择题练习</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">题目 <span id="choiceCurrentNum" class="text-white font-bold">1</span> / <span id="choiceTotalNum">30</span></span>
+                    <button id="favoriteChoiceBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-star-line mr-1"></i>收藏
                     </button>
-                    <button id="randomChoiceBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button id="randomChoiceBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-shuffle-line mr-1"></i>随机
                     </button>
                 </div>
@@ -422,20 +458,18 @@
                 <div id="choiceAiContent" class="text-gray-300 whitespace-pre-wrap"></div>
             </div>
 
-            <div class="flex justify-between items-center">
-                <button id="prevChoiceBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    <i class="ri-arrow-left-line mr-2"></i>上一题
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <button id="prevChoiceBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-arrow-left-line mr-1 text-lg md:text-xl"></i>上一题
                 </button>
-                <div class="flex gap-3">
-                    <button id="aiExplainChoiceBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-robot-line mr-2"></i>AI讲解
-                    </button>
-                    <button id="submitChoiceBtn" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-check-line mr-2"></i>提交答案
-                    </button>
-                </div>
-                <button id="nextChoiceBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    下一题<i class="ri-arrow-right-line ml-2"></i>
+                <button id="aiExplainChoiceBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-robot-line mr-1 text-lg md:text-xl"></i>AI讲解
+                </button>
+                <button id="submitChoiceBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-check-line mr-1 text-lg md:text-xl"></i>提交答案
+                </button>
+                <button id="nextChoiceBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    下一题<i class="ri-arrow-right-line ml-1 text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
@@ -444,14 +478,14 @@
     <!-- 填空题页面 -->
     <div id="page-fill" class="page pt-20 min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
-            <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold"><i class="ri-edit-box-line mr-2 text-green-400"></i>程序填空题</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-400">题目 <span id="fillCurrentNum" class="text-white font-bold">1</span> / <span id="fillTotalNum">20</span></span>
-                    <button id="favoriteFillBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
+                <h1 class="text-2xl sm:text-3xl font-bold"><i class="ri-edit-box-line mr-2 text-green-400"></i>程序填空题</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">题目 <span id="fillCurrentNum" class="text-white font-bold">1</span> / <span id="fillTotalNum">20</span></span>
+                    <button id="favoriteFillBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-star-line mr-1"></i>收藏
                     </button>
-                    <button id="randomFillBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button id="randomFillBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-shuffle-line mr-1"></i>随机
                     </button>
                 </div>
@@ -495,20 +529,18 @@
                 <div id="fillAiContent" class="text-gray-300 whitespace-pre-wrap"></div>
             </div>
 
-            <div class="flex justify-between items-center">
-                <button id="prevFillBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    <i class="ri-arrow-left-line mr-2"></i>上一题
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <button id="prevFillBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-arrow-left-line mr-1 text-lg md:text-xl"></i>上一题
                 </button>
-                <div class="flex gap-3">
-                    <button id="aiExplainFillBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-robot-line mr-2"></i>AI讲解
-                    </button>
-                    <button id="submitFillBtn" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-check-line mr-2"></i>提交答案
-                    </button>
-                </div>
-                <button id="nextFillBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    下一题<i class="ri-arrow-right-line ml-2"></i>
+                <button id="aiExplainFillBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-robot-line mr-1 text-lg md:text-xl"></i>AI讲解
+                </button>
+                <button id="submitFillBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-check-line mr-1 text-lg md:text-xl"></i>提交答案
+                </button>
+                <button id="nextFillBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    下一题<i class="ri-arrow-right-line ml-1 text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
@@ -517,14 +549,14 @@
     <!-- 编程题页面 -->
     <div id="page-program" class="page pt-20 min-h-screen">
         <div class="max-w-6xl mx-auto px-4 py-8">
-            <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold"><i class="ri-terminal-box-line mr-2 text-purple-400"></i>程序设计题</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-400">题目 <span id="programCurrentNum" class="text-white font-bold">1</span> / <span id="programTotalNum">15</span></span>
-                    <button id="favoriteProgramBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
+                <h1 class="text-2xl sm:text-3xl font-bold"><i class="ri-terminal-box-line mr-2 text-purple-400"></i>程序设计题</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">题目 <span id="programCurrentNum" class="text-white font-bold">1</span> / <span id="programTotalNum">15</span></span>
+                    <button id="favoriteProgramBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-star-line mr-1"></i>收藏
                     </button>
-                    <button id="randomProgramBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button id="randomProgramBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-shuffle-line mr-1"></i>随机
                     </button>
                 </div>
@@ -577,17 +609,17 @@
                         <textarea id="programInput" class="w-full px-4 py-3 bg-black/30 rounded-xl border border-white/10 focus:border-green-500 focus:outline-none code-font text-sm resize-none" placeholder="输入数据，每行一个..." rows="3"></textarea>
                     </div>
 
-                    <div class="flex gap-3">
-                        <button id="runProgramBtn" class="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition">
-                            <i class="ri-play-fill mr-2"></i>运行代码
-                        </button>
-                        <button id="aiAnalyzeProgramBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition">
-                            <i class="ri-robot-line mr-2"></i>AI分析
-                        </button>
-                        <button id="showAnswerBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                            <i class="ri-check-line mr-2"></i>AI判断
-                        </button>
-                    </div>
+                    <div class="flex gap-3 flex-wrap">
+                <button id="runProgramBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-play-fill mr-1 text-lg md:text-xl"></i>运行代码
+                </button>
+                <button id="aiAnalyzeProgramBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-robot-line mr-1 text-lg md:text-xl"></i>AI分析
+                </button>
+                <button id="showAnswerBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-check-line mr-1 text-lg md:text-xl"></i>AI判断
+                </button>
+            </div>
 
                     <div id="programOutput" class="code-editor rounded-xl p-4" style="display:none;">
                         <div class="flex items-center gap-2 mb-2 text-gray-400">
@@ -599,12 +631,12 @@
                 </div>
             </div>
 
-            <div class="flex justify-between items-center mt-8">
-                <button id="prevProgramBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    <i class="ri-arrow-left-line mr-2"></i>上一题
+            <div class="flex justify-between items-center mt-8 gap-3">
+                <button id="prevProgramBtn" class="flex-1 px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-arrow-left-line mr-1 text-lg md:text-xl"></i>上一题
                 </button>
-                <button id="nextProgramBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    下一题<i class="ri-arrow-right-line ml-2"></i>
+                <button id="nextProgramBtn" class="flex-1 px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    下一题<i class="ri-arrow-right-line ml-1 text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
@@ -613,14 +645,14 @@
     <!-- 程序阅读题页面 -->
     <div id="page-reading" class="page pt-20 min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
-            <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold"><i class="ri-file-code-line mr-2 text-purple-400"></i>程序阅读题</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-400">题目 <span id="readingCurrentNum" class="text-white font-bold">1</span> / <span id="readingTotalNum">28</span></span>
-                    <button id="favoriteReadingBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
+                <h1 class="text-2xl sm:text-3xl font-bold"><i class="ri-file-code-line mr-2 text-purple-400"></i>程序阅读题</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">题目 <span id="readingCurrentNum" class="text-white font-bold">1</span> / <span id="readingTotalNum">28</span></span>
+                    <button id="favoriteReadingBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-star-line mr-1"></i>收藏
                     </button>
-                    <button id="randomReadingBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button id="randomReadingBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-shuffle-line mr-1"></i>随机
                     </button>
                 </div>
@@ -667,20 +699,18 @@
                 <div id="readingAiContent" class="text-gray-300 whitespace-pre-wrap"></div>
             </div>
 
-            <div class="flex justify-between items-center">
-                <button id="prevReadingBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    <i class="ri-arrow-left-line mr-2"></i>上一题
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <button id="prevReadingBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-arrow-left-line mr-1 text-lg md:text-xl"></i>上一题
                 </button>
-                <div class="flex gap-3">
-                    <button id="aiExplainReadingBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-robot-line mr-2"></i>AI讲解
-                    </button>
-                    <button id="submitReadingBtn" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-check-line mr-2"></i>提交答案
-                    </button>
-                </div>
-                <button id="nextReadingBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    下一题<i class="ri-arrow-right-line ml-2"></i>
+                <button id="aiExplainReadingBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-robot-line mr-1 text-lg md:text-xl"></i>AI讲解
+                </button>
+                <button id="submitReadingBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-check-line mr-1 text-lg md:text-xl"></i>提交答案
+                </button>
+                <button id="nextReadingBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    下一题<i class="ri-arrow-right-line ml-1 text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
@@ -689,14 +719,14 @@
     <!-- 填空题页面 -->
     <div id="page-blank" class="page pt-20 min-h-screen">
         <div class="max-w-4xl mx-auto px-4 py-8">
-            <div class="flex items-center justify-between mb-8">
-                <h1 class="text-3xl font-bold"><i class="ri-edit-2-line mr-2 text-blue-400"></i>填空题练习</h1>
-                <div class="flex items-center gap-4">
-                    <span class="text-gray-400">题目 <span id="blankCurrentNum" class="text-white font-bold">1</span> / <span id="blankTotalNum"></span></span>
-                    <button id="favoriteBlankBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+            <div class="flex flex-wrap items-center justify-between mb-6 gap-4">
+                <h1 class="text-2xl sm:text-3xl font-bold"><i class="ri-edit-2-line mr-2 text-blue-400"></i>填空题练习</h1>
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-400 text-sm sm:text-base">题目 <span id="blankCurrentNum" class="text-white font-bold">1</span> / <span id="blankTotalNum"></span></span>
+                    <button id="favoriteBlankBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-star-line mr-1"></i>收藏
                     </button>
-                    <button id="randomBlankBtn" class="px-4 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <button id="randomBlankBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 rounded-lg hover:bg-white/20 transition text-sm">
                         <i class="ri-shuffle-line mr-1"></i>随机
                     </button>
                 </div>
@@ -729,20 +759,18 @@
                 <div id="blankAiContent" class="text-gray-300 whitespace-pre-wrap"></div>
             </div>
 
-            <div class="flex justify-between items-center">
-                <button id="prevBlankBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    <i class="ri-arrow-left-line mr-2"></i>上一题
+            <div class="flex justify-between items-center flex-wrap gap-3">
+                <button id="prevBlankBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    <i class="ri-arrow-left-line mr-1 text-lg md:text-xl"></i>上一题
                 </button>
-                <div class="flex gap-3">
-                    <button id="aiExplainBlankBtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-robot-line mr-2"></i>AI讲解
-                    </button>
-                    <button id="submitBlankBtn" class="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition">
-                        <i class="ri-check-line mr-2"></i>提交答案
-                    </button>
-                </div>
-                <button id="nextBlankBtn" class="px-6 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition">
-                    下一题<i class="ri-arrow-right-line ml-2"></i>
+                <button id="aiExplainBlankBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-robot-line mr-1 text-lg md:text-xl"></i>AI讲解
+                </button>
+                <button id="submitBlankBtn" class="flex-1 min-w-[120px] px-4 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-xl hover:opacity-90 transition text-sm md:text-base">
+                    <i class="ri-check-line mr-1 text-lg md:text-xl"></i>提交答案
+                </button>
+                <button id="nextBlankBtn" class="flex-1 min-w-[100px] px-4 py-3 bg-white/10 rounded-xl hover:bg-white/20 transition text-sm md:text-base">
+                    下一题<i class="ri-arrow-right-line ml-1 text-lg md:text-xl"></i>
                 </button>
             </div>
         </div>
@@ -947,8 +975,8 @@
 
     
     <!-- AI问答弹窗 -->
-    <div id="qaModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center" style="display:none;">
-        <div class="card-gradient rounded-2xl border border-white/10 w-full max-w-3xl mx-4 max-h-[80vh] flex flex-col">
+    <div id="qaModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center overflow-hidden" style="display:none;">
+        <div class="card-gradient rounded-2xl border border-white/10 w-full max-w-3xl mx-4 max-h-[90vh] flex flex-col">
             <div class="flex items-center justify-between p-6 border-b border-white/10">
                 <h2 class="text-xl font-bold"><i class="ri-robot-2-line mr-2 text-indigo-400"></i>AI 智能问答</h2>
                 <div class="flex items-center gap-3">
@@ -962,7 +990,7 @@
             </div>
             
             <!-- 对话内容区域 -->
-            <div id="qaChatArea" class="flex-1 overflow-y-auto p-6 space-y-6">
+            <div id="qaChatArea" class="flex-1 overflow-y-auto p-6 space-y-6 break-words">
                 <!-- 系统欢迎消息 -->
                 <div class="flex gap-4">
                     <div class="w-10 h-10 bg-indigo-500/30 rounded-full flex items-center justify-center flex-shrink-0">
@@ -977,24 +1005,31 @@
             </div>
             
             <!-- 常见问题区域 -->
-            <div class="p-6 border-t border-white/10 bg-black/20">
-                <h3 class="text-sm text-gray-400 mb-3 flex items-center gap-2">
-                    <i class="ri-question-line"></i>
-                    常见问题
-                </h3>
-                <div id="qaCommonQuestions" class="flex flex-wrap gap-2">
+            <div class="border-t border-white/10 bg-black/20">
+                <div id="commonQuestionsHeader" class="p-6 flex items-center justify-between cursor-pointer hover:bg-white/5 transition">
+                    <h3 class="text-sm text-gray-400 flex items-center gap-2">
+                        <i class="ri-question-line"></i>
+                        常见问题
+                    </h3>
+                    <i id="commonQuestionsIcon" class="ri-chevron-down-line text-sm text-gray-400 transition-transform duration-300"></i>
+                </div>
+                <div id="qaCommonQuestions" class="p-6 pt-0 flex flex-wrap gap-2 max-h-32 overflow-y-auto transition-all duration-300">
                     <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">什么是变量？</button>
                     <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">如何声明数组？</button>
                     <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">指针是什么？</button>
                     <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">如何定义函数？</button>
+                    <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">C语言的基本数据类型有哪些？</button>
+                    <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">如何使用printf和scanf？</button>
+                    <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">什么是循环结构？</button>
+                    <button class="px-4 py-2 bg-white/10 rounded-lg text-sm hover:bg-white/20 transition common-question">如何处理字符串？</button>
                 </div>
             </div>
             
             <!-- 输入区域 -->
             <div class="p-6 border-t border-white/10">
                 <div class="flex gap-3">
-                    <textarea id="qaInput" class="flex-1 min-h-[100px] px-4 py-3 bg-black/30 rounded-xl border border-white/10 focus:border-indigo-500 focus:outline-none resize-y" placeholder="输入你的问题...可以粘贴代码"></textarea>
-                    <button id="sendQABtn" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition self-end">
+                    <textarea id="qaInput" class="flex-1 min-h-[80px] max-h-[200px] px-4 py-3 bg-black/30 rounded-xl border border-white/10 focus:border-indigo-500 focus:outline-none resize-y" placeholder="输入你的问题...可以粘贴代码"></textarea>
+                    <button id="sendQABtn" class="px-4 sm:px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-xl hover:opacity-90 transition self-end">
                         <i class="ri-send-plane-line"></i>
                     </button>
                 </div>
@@ -2940,6 +2975,81 @@ ${code}
                 showPage('favorites');
             });
             
+            // 移动端菜单功能
+            const mobileMenuBtnEl = document.getElementById('mobileMenuBtn');
+            const mobileMenuEl = document.getElementById('mobileMenu');
+            if (mobileMenuBtnEl && mobileMenuEl) {
+                mobileMenuBtnEl.addEventListener('click', () => {
+                    if (mobileMenuEl.classList.contains('hidden')) {
+                        // 显示菜单，添加动画效果
+                        mobileMenuEl.classList.remove('hidden');
+                        setTimeout(() => {
+                            mobileMenuEl.classList.add('scale-y-100', 'opacity-100');
+                            mobileMenuEl.classList.remove('scale-y-0', 'opacity-0');
+                        }, 10);
+                    } else {
+                        // 隐藏菜单，添加动画效果
+                        mobileMenuEl.classList.remove('scale-y-100', 'opacity-100');
+                        mobileMenuEl.classList.add('scale-y-0', 'opacity-0');
+                        setTimeout(() => {
+                            mobileMenuEl.classList.add('hidden');
+                        }, 300);
+                    }
+                });
+            }
+
+            // 常见问题收缩展开功能
+            const commonQuestionsHeaderEl = document.getElementById('commonQuestionsHeader');
+            const commonQuestionsIconEl = document.getElementById('commonQuestionsIcon');
+            const qaCommonQuestionsEl = document.getElementById('qaCommonQuestions');
+            if (commonQuestionsHeaderEl && commonQuestionsIconEl && qaCommonQuestionsEl) {
+                let isExpanded = true;
+                commonQuestionsHeaderEl.addEventListener('click', () => {
+                    isExpanded = !isExpanded;
+                    if (isExpanded) {
+                        // 展开
+                        qaCommonQuestionsEl.classList.remove('max-h-0', 'opacity-0', 'pb-0');
+                        qaCommonQuestionsEl.classList.add('max-h-32', 'opacity-100', 'pb-6');
+                        commonQuestionsIconEl.classList.remove('rotate-180');
+                    } else {
+                        // 收缩
+                        qaCommonQuestionsEl.classList.remove('max-h-32', 'opacity-100', 'pb-6');
+                        qaCommonQuestionsEl.classList.add('max-h-0', 'opacity-0', 'pb-0');
+                        commonQuestionsIconEl.classList.add('rotate-180');
+                    }
+                });
+            }
+            
+            // 移动端导航按钮事件监听
+            const mobileNavButtons = [
+                { id: 'mobile-nav-home', page: 'home' },
+                { id: 'mobile-nav-choice', page: 'choice' },
+                { id: 'mobile-nav-fill', page: 'fill' },
+                { id: 'mobile-nav-blank', page: 'blank' },
+                { id: 'mobile-nav-program', page: 'program' },
+                { id: 'mobile-nav-reading', page: 'reading' },
+                { id: 'mobile-nav-simulator', page: 'simulator' },
+                { id: 'mobile-nav-favorites', page: 'favorites' }
+            ];
+            
+            mobileNavButtons.forEach(({ id, page }) => {
+                const btn = document.getElementById(id);
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        const mobileMenuEl = document.getElementById('mobileMenu');
+                        if (mobileMenuEl) {
+                            // 先添加动画效果，再跳转页面
+                            mobileMenuEl.classList.remove('scale-y-100', 'opacity-100');
+                            mobileMenuEl.classList.add('scale-y-0', 'opacity-0');
+                            setTimeout(() => {
+                                mobileMenuEl.classList.add('hidden');
+                                showPage(page);
+                            }, 300);
+                        }
+                    });
+                }
+            });
+            
             const closeQAModalBtnEl = document.getElementById('closeQAModalBtn');
             if (closeQAModalBtnEl) closeQAModalBtnEl.addEventListener('click', () => {
                 const qaModalEl = document.getElementById('qaModal');
@@ -3107,7 +3217,7 @@ ${code}
                             <i class="ri-robot-line text-indigo-400"></i>
                         </div>
                         <div class="flex-1">
-                            <div class="card-gradient p-4 rounded-xl">
+                            <div class="card-gradient p-4 rounded-xl max-w-[80%]">
                                 ${content}
                             </div>
                         </div>
